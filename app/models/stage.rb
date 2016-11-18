@@ -177,6 +177,11 @@ class Stage < ActiveRecord::Base
     DeployGroup.enabled? ? deploy_groups.map(&:environment).uniq : []
   end
 
+  def influencing_stage_ids
+    deploy_group_ids = deploy_groups_stages.reorder(nil).pluck(:deploy_group_id)
+    DeployGroupsStage.reorder(nil).where(deploy_group_id: deploy_group_ids).pluck('distinct stage_id')
+  end
+
   private
 
   def permalink_base
