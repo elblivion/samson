@@ -1,9 +1,12 @@
 FROM ruby:2.3.1-slim
 
-RUN apt-get update && apt-get install -y wget apt-transport-https git
+RUN apt-get update && apt-get install -y wget apt-transport-https git curl && \
+     rm -rf /var/lib/apt/lists/*
 RUN wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
 RUN echo 'deb https://deb.nodesource.com/node_0.12 jessie main' > /etc/apt/sources.list.d/nodesource.list
-RUN apt-get update && apt-get install -y nodejs build-essential libmysqlclient-dev libpq-dev libsqlite3-dev
+RUN apt-get update && apt-get install -y nodejs build-essential libmysqlclient-dev libpq-dev libsqlite3-dev && \
+     rm -rf /var/lib/apt/lists/*
+
 
 WORKDIR /app
 
