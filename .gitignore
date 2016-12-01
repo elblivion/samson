@@ -17,9 +17,6 @@
 /log/*.log.json
 /tmp
 
-# Ignore config
-/config/database.yml
-
 /node_modules
 
 /public/assets
